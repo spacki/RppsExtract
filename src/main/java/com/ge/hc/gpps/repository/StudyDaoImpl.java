@@ -2,8 +2,8 @@ package com.ge.hc.gpps.repository;
 
 import com.ge.hc.gpps.domain.Study;
 import org.apache.log4j.Logger;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -113,7 +113,7 @@ public class StudyDaoImpl implements StudyDao {
         return studies;
     }
 
-    private static class StudyRowMapper  implements ParameterizedRowMapper<Study> {
+    private static class StudyRowMapper  implements RowMapper<Study> {
 
         @Override
         public Study mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -132,7 +132,7 @@ public class StudyDaoImpl implements StudyDao {
         }
     }
 
-    private ParameterizedRowMapper<Study>getMapper() {
+    private RowMapper<Study>getMapper() {
         return  new StudyRowMapper();
     }
 

@@ -3,8 +3,8 @@ package com.ge.hc.gpps.repository;
 import com.ge.hc.gpps.domain.Image;
 import com.ge.hc.gpps.domain.Study;
 import org.apache.log4j.Logger;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -48,7 +48,7 @@ public class ImageDaoImpl implements ImageDao  {
     }
 
 
-    private static class ImageRowMapper  implements ParameterizedRowMapper<Image> {
+    private static class ImageRowMapper  implements RowMapper<Image> {
 
         @Override
         public Image mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -64,7 +64,7 @@ public class ImageDaoImpl implements ImageDao  {
         }
     }
 
-    private ParameterizedRowMapper<Image>getMapper() {
+    private RowMapper<Image>getMapper() {
         return  new ImageRowMapper();
     }
 }
