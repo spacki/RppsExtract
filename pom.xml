@@ -4,7 +4,7 @@
   <groupId>com.ge.hc.gpps</groupId>
   <artifactId>RppsExtractor</artifactId>
   <packaging>jar</packaging>
-  <version>1.5.8-SNAPSHOT</version>
+  <version>1.5.9-SNAPSHOT</version>
   <name>RppsExtractor</name>
   <url>http://maven.apache.org</url>
   <properties>
