@@ -4,11 +4,11 @@
   <groupId>com.ge.hc.gpps</groupId>
   <artifactId>RppsExtractor</artifactId>
   <packaging>jar</packaging>
-  <version>1.5.9-SNAPSHOT</version>
+  <version>1.5.10-SNAPSHOT</version>
   <name>RppsExtractor</name>
   <url>http://maven.apache.org</url>
   <properties>
-        <spring.version>3.1.0.RELEASE</spring.version>
+        <spring.version>3.2.9.RELEASE</spring.version>
         <log4j.version>1.2.16</log4j.version>
     </properties>
 
