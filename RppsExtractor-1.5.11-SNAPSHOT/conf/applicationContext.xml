@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd ">
+
+
+    <!--ctx:property-placeholder location="classpath:gpps.properties"/-->
+    <ctx:property-placeholder location="classpath:gpps.properties"></ctx:property-placeholder>
+
+    <bean id="queryConstraint" class="com.ge.hc.gpps.domain.QueryConstraint">
+        <property name="updateTS" value="${updateTS}"/>
+        <property name="authorityCkey" value="${authorityCkey}"/>
+    </bean>
+
+    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+        <property name="targetMethod" value="initLogging" />
+        <property name="arguments" value="classpath:log4j.properties"/>
+    </bean>
+
+    <bean id="studyService" class="com.ge.hc.gpps.service.StudyServiceImpl">
+        <property ref="studyDao" name="studyDao"/>
+    </bean>
+
+    <bean id="imageService" class="com.ge.hc.gpps.service.ImageServiceImpl">
+        <property ref="imageDao" name="imageDao"/>
+    </bean>
+
+    <bean id="studyDao" class="com.ge.hc.gpps.repository.StudyDaoImpl">
+        <property ref="dataSource" name="dataSource"/>
+    </bean>
+
+    <bean id="imageDao" class="com.ge.hc.gpps.repository.ImageDaoImpl">
+        <property ref="dataSource" name="dataSource"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driverClass}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${dbuser}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="2"/>
+        <property name="maxActive" value="5"/>
+        <!--property name="loginTimeout" value="50000" /-->
+        <property name="maxIdle" value="50000"></property>
+        <property name="maxWait" value="50000"></property>
+        
+    </bean>
+
+
+</beans>

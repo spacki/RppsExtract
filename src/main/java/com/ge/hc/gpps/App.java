@@ -51,6 +51,9 @@ public class App {
         for (Integer key : keys) {
             logger.debug("getting study for key " + key);
             Study study = studyService.getStudy(key, constraint.getAuthorityCkey());
+            if (study == null) {
+                continue;
+            }
             List<String> sopInstanceUids = new ArrayList<String>();
             study.setSopInstanceUids(sopInstanceUids);
             logger.debug("process study : " + study);

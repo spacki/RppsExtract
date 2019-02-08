@@ -27,7 +27,8 @@ public class StudyDaoImpl implements StudyDao {
 
     private static String SELECT = "select examination.exam_ckey as exam_ckey, ris_exam_id, study_instance_uid, rpps_data " +
             " from examination, rp_presentation_state " +
-            " where examination.exam_ckey = rp_presentation_state.exam_ckey " ;
+            " where examination.exam_ckey = rp_presentation_state.exam_ckey " +
+            " order by examination.exam_ckey" ;
 
 
     private static String FIND = "select examination.exam_ckey as exam_ckey, ris_exam_id, study_instance_uid, rpps_data " +
@@ -43,6 +44,7 @@ public class StudyDaoImpl implements StudyDao {
     private static String SELECTKEYS = "select examination.exam_ckey as exam_ckey " +
             " from examination, rp_presentation_state " +
             " where examination.exam_ckey = rp_presentation_state.exam_ckey ";
+            //" order by examination.exam_ckey ";
            // " and examination.exam_ckey < 100";
 
 
@@ -56,7 +58,8 @@ public class StudyDaoImpl implements StudyDao {
         String sql = SELECTKEYS +
                // " and examination.exam_ckey > :key";
                //" and rp_presentation_state.last_update_dttm> :key";
-               " and convert(char(10), last_update_dttm, 102) > :key";
+               " and convert(char(10), last_update_dttm, 102) > :key" +
+                " order by examination.exam_ckey";
         logger.warn("execute sql: " + sql);
         Map<String, Object> parameters = null;
         parameters = new HashMap<String, Object>();
@@ -76,6 +79,7 @@ public class StudyDaoImpl implements StudyDao {
     @Override
     public Study getStudy(int id, int authorityCkey) {
         String sql = FIND +
+                " and rp_presentation_state.active = 1 " +
                 " and patient_identifier.authority_ckey = :auth_key " +
                 " and examination.exam_ckey = :key";
         logger.warn("excute sql: " + sql);
