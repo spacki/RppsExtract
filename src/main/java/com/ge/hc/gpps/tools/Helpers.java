@@ -170,7 +170,9 @@ public class Helpers {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            logger.error("cannnot unzip object for " + study.getStudyInstanceUid());
+            writeZipError(study);
+            return new ArrayList<String>();
         }
         return sopInstanceUids;
     }
@@ -285,6 +287,30 @@ public class Helpers {
                 System.out.println(tagAddr + " [" + tagVR + "] " + tagName + " [" + tagValue + "]");
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public static void writeZipError(Study study) {
+
+        BufferedWriter bufferedWriter = null;
+        try {
+            String strContent = "This example shows how to write string content to a file";
+            File myFile = new File("corruptzip.txt");
+            // check if file exist, otherwise create the file before writing
+            if (!myFile.exists()) {
+                myFile.createNewFile();
+            }
+            Writer writer = new FileWriter(myFile);
+            bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.append("Study: "  + study.getStudyInstanceUid() +" zip file coruupt" );
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally{
+            try{
+                if(bufferedWriter != null) bufferedWriter.close();
+            } catch(Exception ex){
+
             }
         }
     }
