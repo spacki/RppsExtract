@@ -1,3 +1,4 @@
+.DS_Store
 # Compiled source #
 ###################
 *.com
@@ -6,6 +7,8 @@
 *.exe
 *.o
 *.so
+*.zip
+*.dcm
 
 # Packages #
 ############
@@ -41,3 +44,7 @@ Thumbs.db
 /out/
 /META-INF/
 /classes/
+
+
+callStoredProcedure.txt
+listOfAllHiddenImages.txt
